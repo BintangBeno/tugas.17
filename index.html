@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avatar Generator</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Avatar Generator</h1>
+        <label for="avatarType">Pilih jenis avatar:</label>
+        <select id="avatarType">
+            <option value="anime">Anime</option>
+            <option value="robot">Robot</option>
+            <option value="pixel">Pixel Art</option>
+        </select>
+        <button onclick="fetchAvatar()">Dapatkan Avatar</button>
+        <div id="avatarContainer">
+            <img id="avatar" src="" alt="Avatar akan muncul di sini">
+        </div>
+    </div>
+
+    <script>
+        async function fetchAvatar() {
+            const type = document.getElementById('avatarType').value;
+            const response = await fetch(`/api/avatar?type=${type}`);
+            const data = await response.json();
+            document.getElementById('avatar').src = data.avatar;
+        }
+    </script>
+</body>
+</html>
+
